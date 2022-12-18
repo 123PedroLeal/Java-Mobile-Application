@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Real Food</string>
+    <!--Nombres de la pantalla Inicial-->
+    <string name="TituloInicio">Real Food</string>
+    <string name="BotonInicio">Ingresar</string>
+</resources>

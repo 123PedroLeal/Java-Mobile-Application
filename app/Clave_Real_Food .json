@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "real-food-94e31",
+  "private_key_id": "da123886be534e654367ef11af2c08e0e59e7775",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDoJ3Cggzv//Czw\nhwzucqzgXwmiMUXPMcJJlX+p4fFszPiQnub3dSMrZ5bxOn2Y0jCuPrS3km3wo9AG\nu2vxQnUgJd8XfpxG9f4KA16Xvaqfr2SH+JlJlWbLGLtVF18sz+foe5T97IAAYX44\nbEyClkhrcFI0bERwxhEKRDXFhPSmwB27ErFbCzKxJu7dGt5Pdqgg68OgozufBNgf\nX0qxbnS9i1JLMXrccyAEKw+LBha27X8zxqdUaSBDppvE1LUwVY5TeUanBq6ynbAs\nnVyaCvBLAycgudPGxiwIsT5ZVMUKb2yfdEnqB3kiy1iYXgN7RnEGV5URZ364454B\n6SKwpexvAgMBAAECggEAKFeGMlZrzEGJm6iUPjFuSjUpquYuD+HBNeFFRIOvXO1H\nenYqg7D20hmXuMalwbMw426hH89RzIHi6fCSwuN+D/6UxHPre0dPBHVucCb06ffk\nG96+4HMWYE+lahV8JADi91rWWsPIwIgwk2R6bSzpW8YyesqfoAtDNcoBoBfJHdqq\n8SurdGsNv2lqfhEtVi9KQ3/eoUh6VcrpZN1zEet3EL968OuxT8K0jLKVGyGUEccS\nuC04Yha4bU9z2FtP3eUJW6UwoL3SAAJnT50NRHRyb6Tn5puCyQco3O2uAcBdWTLi\nefPpTnVxjLL71o6CK4NGODoMo8YmY/omXme8LcSh9QKBgQD4z+0IWrLqfMMS9raH\n7OxsXy2LXvR6G2gzMQt2bWpw/aUftHv7MdivrnWNO1nyEuq3QVzo7F1K7j6c4S0u\nwpD+F+moeI+34rma2E23cf96y89Fz9dozfBCr8KjrWTMg87wCjkXw/fIcLoh2Ift\nOsG2EqyVanSbZTDsuaIHfREt0wKBgQDu3FHfiHFR2U1e/y6pAkhnxmpnkjAnDltZ\nsCpydpp8+RtVUhnCnuFUfFjd89qDLbZ/zonJNjg3p7+0WpM14e3lch2zSmgzitxV\nCK8pChwBfi70zgan96gdBjKjRXWYCL2DnHjQ1F4eXdO+pOYb9g8DxZ0zHDEYK/of\nVl6g4gg5dQKBgHp13DRAb875mQm8ZBqCgdrU/ZWbJrjyxFZtzTZ8o+b48EyqiFsa\nLYxKUZExpROAPAX2JcR+kWxP1oFgUtyw5qwpGNfSfuoCrVeJHrcrZJMLvPifU2ZB\n9f7cgvAMZ5BBT5jVb0RDL7F3yiTebghU4wK6LjdcLghNxca9lwIYjFwBAoGATL/a\nRtsOnmAWbknMcl3bagzlL7ZXZpVEYQMsAG9/oFxinf2tbU2j1YPHAjpSogfUNijl\nORQE6E0sWgUofA3GZQ1P4cYsyTL7LQ+HSMaIzSoAaISyutHm4LyXFMNCz8EvM9TZ\nNTCntVYsrXtKvP1JQcsDgeKzG7M1wU/9Q/Cc9+kCgYBu2v3hud/XEupP6GHj4Eb6\nVSiUy5qwivpBHyyMfw3klYZBVx+TPckvhw3CAihXskgF5V0/eVSIHtmWfGangLMy\nn32egH8rCK+O2YNWUxfFpxM5Fj4Ou5QhrpxbvkeRO7JCFCf9gK9ci8rqr0j10WVW\niu70R8RlZwYniNdSHLcqig==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-pozti@real-food-94e31.iam.gserviceaccount.com",
+  "client_id": "109335375747967940114",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-pozti%40real-food-94e31.iam.gserviceaccount.com"
+}

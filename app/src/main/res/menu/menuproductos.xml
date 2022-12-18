@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/ItemComprar"
+        android:icon="@drawable/ic_compra"
+        android:title=""
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/ItemBuscar"
+        android:icon="@drawable/ic_busqueda"
+        android:title=""
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/ItemMas"
+        android:icon="@drawable/ic_masopciones"
+        android:title=""
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/accionagregar"
+                android:orderInCategory="100"
+                android:title="Agregar"
+                app:showAsAction="ifRoom" />
+        </menu>
+
+    </item>
+
+</menu>

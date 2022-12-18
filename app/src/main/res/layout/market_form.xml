@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="#AEC670">
+
+    <TextView
+        android:id="@+id/TituloFormularioSucursal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Formulario"
+        android:fontFamily="@font/dmserifdisplay_regular"
+        android:textColor="#344C11"
+        android:textSize="65dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/ImagenSucursalNS"
+            android:layout_width="300dp"
+            android:layout_height="230dp"
+            app:srcCompat="@drawable/ic_busqueda_imagenes" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <EditText
+                android:id="@+id/EspacioNombreNS"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:gravity="center"
+
+                android:hint="Ingrese aqui el Nombre"
+                android:textSize="20dp"
+                android:fontFamily="@font/dmsans_bold"
+                android:textColor="@color/green_primary"/>
+
+            <EditText
+                android:id="@+id/EspacioUbicacionNS"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:gravity="center"
+
+                android:hint="Ingrese aqui la Ubicación"
+                android:textSize="20dp"
+                android:fontFamily="@font/dmsans_bold"
+                android:textColor="@color/green_primary"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/BotonCrearSucursalNS"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/des_botonesnew"
+                android:fontFamily="@font/dmsans_bold"
+                android:layout_marginRight="20dp"
+
+                android:gravity="center"
+                android:text="Crear"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/BotonActualizarSucursalNS"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/des_botonesnew"
+
+                android:fontFamily="@font/dmsans_bold"
+                android:gravity="center"
+                android:text="Actualizar"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="">
+
+        <EditText
+            android:id="@+id/EspacioIdSucursalNS"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="number"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:hint="Ingrese aqui el numero de la Sucursal"
+            android:textSize="20dp"
+            android:fontFamily="@font/dmsans_bold"
+            android:textColor="@color/green_primary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/BotonConsultarSucursalNS"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/des_botonesnew"
+                android:layout_marginRight="20dp"
+
+                android:fontFamily="@font/dmsans_bold"
+                android:text="Consultar"
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+
+            <Button
+                android:id="@+id/BotonBorrarSucursalNS"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/des_botonesnew"
+
+                android:fontFamily="@font/dmsans_bold"
+                android:text="Borrar"
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

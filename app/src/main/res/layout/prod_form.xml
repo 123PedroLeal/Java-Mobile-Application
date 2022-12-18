@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Vistas.Productos.FormularioProductos"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="#AEC670">
+
+    <TextView
+        android:id="@+id/TituloFormularioProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Formulario"
+        android:fontFamily="@font/dmserifdisplay_regular"
+        android:textColor="#344C11"
+        android:textSize="65dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/ImagenProductoNP"
+            android:layout_width="300dp"
+            android:layout_height="230dp"
+            app:srcCompat="@drawable/ic_busqueda_imagenes" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <EditText
+                android:id="@+id/EspacioNombreNP"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:gravity="center"
+
+                android:hint="Ingrese aqui el Nombre"
+                android:textSize="20dp"
+                android:fontFamily="@font/dmsans_bold"
+                android:textColor="@color/green_primary"/>
+
+            <EditText
+                android:id="@+id/EspacioDescripcionNP"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:gravity="center"
+
+                android:hint="Ingrese aqui la Descripcion"
+                android:textSize="20dp"
+                android:fontFamily="@font/dmsans_bold"
+                android:textColor="@color/green_primary"/>
+
+            <EditText
+                android:id="@+id/EspacioPrecioNP"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:gravity="center"
+
+                android:hint="Ingrese aqui el Precio"
+                android:textSize="20dp"
+                android:fontFamily="@font/dmsans_bold"
+                android:textColor="@color/green_primary"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/BotonCrearProductoNP"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/des_botonesnew"
+                android:fontFamily="@font/dmsans_bold"
+                android:layout_marginRight="20dp"
+
+                android:gravity="center"
+                android:text="Crear"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/BotonActualizarProductoNP"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/des_botonesnew"
+
+                android:fontFamily="@font/dmsans_bold"
+                android:gravity="center"
+                android:text="Actualizar"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="">
+
+        <EditText
+            android:id="@+id/EspacioIdProductoNP"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="number"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+
+            android:hint="Ingrese aqui el numero del Producto"
+            android:textSize="20dp"
+            android:fontFamily="@font/dmsans_bold"
+            android:textColor="@color/green_primary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/BotonConsultarProductoNP"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/des_botonesnew"
+                android:layout_marginRight="20dp"
+
+                android:fontFamily="@font/dmsans_bold"
+                android:text="Consultar"
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+
+            <Button
+                android:id="@+id/BotonBorrarProductoNP"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/des_botonesnew"
+
+                android:fontFamily="@font/dmsans_bold"
+                android:text="Borrar"
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
