@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.example.real_food.R;
 import com.example.real_food.Vistas.Productos.Catalogo_Productos;
+import com.example.real_food.Vistas.Sucursales.Catalogo_Sucursales;
 
 public class Opciones extends AppCompatActivity {
     private Button BotonVolverLogin;
@@ -50,7 +51,7 @@ public class Opciones extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getApplicationContext(), Catalogo_Productos.class);
+                Intent intent = new Intent(getApplicationContext(), Catalogo_Sucursales.class);
                 startActivity(intent);
             }
         });

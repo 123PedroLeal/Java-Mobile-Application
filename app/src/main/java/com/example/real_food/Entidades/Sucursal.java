@@ -5,27 +5,29 @@ import java.util.UUID;
 public class Sucursal
 {
     private String Id;
-    private String Imagen;
     private String Nombre;
-    private String Ubicacion;
+    private Double Latitud;
+    private Double Longitud;
+    private String Imagen;
 
     // Constructor para la base de datos local.
-    public Sucursal(String id, String nombre,String ubicacion,String imagen)
+    public Sucursal(String id, String nombre, Double latitud, Double longitud,String imagen)
     {
         this.Id = id;
         this.Nombre = nombre;
-        this.Ubicacion = ubicacion;
+        this.Latitud = latitud;
+        this.Longitud = longitud;
         this.Imagen = imagen;
     }
 
     //Constructor temporal para Firebase.
-    public Sucursal(String nombre, String ubicacion, String imagen)
+    public Sucursal(String nombre,Double latitud, Double longitud,String imagen)
     {
         this.Id = UUID.randomUUID().toString();
         this.Nombre = nombre;
-        this.Ubicacion = ubicacion;
+        this.Latitud = latitud;
+        this.Longitud = longitud;
         this.Imagen = imagen;
-        ;
     }
 
     public String getId()
@@ -54,13 +56,23 @@ public class Sucursal
         Nombre = nombre;
     }
 
-    public String getUbicacion()
+    public Double getLatitud()
     {
-        return Ubicacion;
+        return Latitud;
     }
 
-    public void setUbicacion(String ubicacion)
+    public void setLatitud(Double latitud)
     {
-        Ubicacion = ubicacion;
+        Latitud = latitud;
+    }
+
+    public Double getLongitud()
+    {
+        return Longitud;
+    }
+
+    public void setLongitud(Double longitud)
+    {
+        Longitud = longitud;
     }
 }

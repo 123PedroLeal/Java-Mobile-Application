@@ -2,31 +2,31 @@ package com.example.real_food.Entidades;
 
 import java.util.UUID;
 
-public class Servicio
+public class Asesor
 {
     private String Id;
-    private String Imagen;
     private String Nombre;
-    private String Description;
-    private int Precio;
+    private String Calificacion;
+    private String Area;
+    private String Imagen;
 
     // Constructor para la base de datos local.
-    public Servicio(String id, String nombre, String description, int precio, String imagen)
+    public Asesor(String id, String nombre, String calificacion, String area, String imagen)
     {
         this.Id = id;
         this.Nombre = nombre;
-        this.Description = description;
-        this.Precio = precio;
+        this.Calificacion = calificacion;
+        this.Area = area;
         this.Imagen = imagen;
     }
 
     //Constructor temporal para Firebase.
-    public Servicio(String nombre, String description, int precio, String imagen)
+    public Asesor(String nombre, String calificacion, String area, String imagen)
     {
         this.Id = UUID.randomUUID().toString();
         this.Nombre = nombre;
-        this.Description = description;
-        this.Precio = precio;
+        this.Calificacion = calificacion;
+        this.Area = area;
         this.Imagen = imagen;
     }
 
@@ -56,19 +56,11 @@ public class Servicio
         Nombre = nombre;
     }
 
-    public String getDescription() {
-        return Description;
-    }
+    public String getCalificacion() {return Calificacion;}
 
-    public void setDescription(String description) {
-        Description = description;
-    }
+    public void setCalificacion(String calificacion) {Calificacion = calificacion;}
 
-    public int getPrecio() {
-        return Precio;
-    }
+    public String getArea() {return Area;}
 
-    public void setPrecio(int precio) {
-        Precio = precio;
-    }
+    public void setArea(String area) {Area = area;}
 }

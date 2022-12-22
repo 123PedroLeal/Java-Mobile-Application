@@ -55,20 +55,21 @@ public class SucursalAdaptador extends BaseAdapter
     public View getView(int position, View convertView, ViewGroup parent)
     {
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
-        convertView = layoutInflater.inflate(R.layout.prod_model,null);
+        convertView = layoutInflater.inflate(R.layout.market_model,null);
 
         Sucursal sucursal = arraySucursales.get(position);
 
-        ImageView imagensucursal = (ImageView) convertView.findViewById(R.id.ImagenProducto);
-        TextView nombresucursal = (TextView)convertView.findViewById(R.id.NombreProducto);
-        TextView ubicacionsucursal = (TextView)convertView.findViewById(R.id.DescripcionProducto);
-        TextView preciosucursal = (TextView)convertView.findViewById(R.id.PrecioProducto);
-        LinearLayout tarjetasucursal = (LinearLayout) convertView.findViewById(R.id.TarjetaProducto);
+        TextView NombreSucursal = (TextView)convertView.findViewById(R.id.NombreSucursal);
+        TextView LatitudSucursal = (TextView)convertView.findViewById(R.id.LatitudSucursal);
+        TextView LongitudSucursal = (TextView)convertView.findViewById(R.id.LongitudSucursal);
+        ImageView ImagenSucursal = (ImageView) convertView.findViewById(R.id.ImagenSucursal);
+        LinearLayout tarjetasucursal = (LinearLayout) convertView.findViewById(R.id.TarjetaSucursal);
 
         //Bitmap bitmap = BitmapFactory.decodeByteArray(producto.getImagen(),0,producto.getImagen().length);
         //imagenproducto.setImageBitmap(bitmap);
-        nombresucursal.setText(sucursal.getNombre());
-        ubicacionsucursal.setText(sucursal.getUbicacion());
+        NombreSucursal.setText(sucursal.getNombre());
+        LatitudSucursal.setText(String.valueOf(sucursal.getLatitud()));
+        LongitudSucursal.setText(String.valueOf(sucursal.getLongitud()));
 
         //Instruccion para que al cliquear la tarjeta completa pase a la vista 3.
         tarjetasucursal.setOnClickListener(new View.OnClickListener()
@@ -79,7 +80,7 @@ public class SucursalAdaptador extends BaseAdapter
                 Intent intent = new Intent(context.getApplicationContext(), Detalle_Productos.class);
                 intent.putExtra("id",sucursal.getId());
                 intent.putExtra("nombre",sucursal.getNombre());
-                intent.putExtra("ubicacion",sucursal.getUbicacion());
+                intent.putExtra("ubicacion",sucursal.getLatitud());
 
                 context.startActivity(intent);
             }

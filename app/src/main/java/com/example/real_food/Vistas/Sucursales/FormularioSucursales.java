@@ -1,10 +1,13 @@
 package com.example.real_food.Vistas.Sucursales;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +28,17 @@ import com.example.real_food.R;
 import com.example.real_food.Servicios.ServicioProductos;
 import com.example.real_food.Servicios.ServicioSucursales;
 
+import org.osmdroid.config.Configuration;
+import org.osmdroid.events.MapEventsReceiver;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.CustomZoomButtonsController;
+import org.osmdroid.views.MapController;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.overlay.gestures.RotationGestureOverlay;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -32,20 +46,69 @@ import java.util.ArrayList;
 public class FormularioSucursales extends AppCompatActivity
 {
     // Declaracion de las variables del formulario.
-    private Button BotonCrearSucursalNS,BotonConsultarSucursalNS,BotonBorrarSucursalNS,BotonActualizarSucursalNS;
-    private EditText EspacioNombreNS, EspacioUbicacionNS, EspacioIdSucursalNS;
-    private ImageView ImagenSucursalNS;
+    private Button BotonCrearSucursalNS,BotonConsultarSucursalNS
+                  ,BotonBorrarSucursalNS,BotonActualizarSucursalNS;
+    private EditText EspacioNombreNS, EspacioLatitudNS, EspacioLongitudNS, EspacioIdSucursalNS;
     private BaseDatos baseDatos;
     private BaseDatosFireBase baseDatosFireBase;
     private ActivityResultLauncher<String> contenido;
     private ServicioSucursales servicioSucursales;
+    private MapView mapa;
+    private MapController mapController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // Codigo tomado para evitar el error de la conexion con SQLite
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        Context ctx = getApplicationContext();
+        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
+
         // Conexion de la interfaz o Layout al codigo de Java.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.market_form);
+
+        mapa = (MapView) findViewById(R.id.MapaSucursal);
+        mapController = (MapController) mapa.getController();
+        mapa.setTileSource(TileSourceFactory.MAPNIK);
+        mapa.setMultiTouchControls(true);
+
+        mapa.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
+        mapController.setZoom(12);
+
+        ScaleBarOverlay mScaleBarOverlay = new ScaleBarOverlay(mapa);
+        mapa.getOverlays().add(mScaleBarOverlay);
+
+        RotationGestureOverlay mRotationGestureOverlay = new RotationGestureOverlay(this, mapa);
+        mRotationGestureOverlay.setEnabled(true);
+        mapa.getOverlays().add(mRotationGestureOverlay);
+
+        GeoPoint madrid = new GeoPoint(40.41675,-3.70379);
+        MapController mMapController= (MapController) mapa.getController();
+        mMapController.setCenter(madrid);
+
+        MapEventsReceiver mapEventsReceiver = new MapEventsReceiver()
+        {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint p)
+            {
+                //Toast.makeText(getApplicationContext(), p.getLatitude() + "-" + p.getLongitude() , Toast.LENGTH_SHORT).show();
+                EspacioLatitudNS.setText(String.valueOf(p.getLatitude()));
+                EspacioLongitudNS.setText(String.valueOf(p.getLongitude()));
+                return false;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint p)
+            {
+                return false;
+            }
+        };
+
+        MapEventsOverlay eventsOverlay = new MapEventsOverlay(getApplicationContext(),mapEventsReceiver);
+        mapa.getOverlays().add(eventsOverlay);
 
         //Conexion de las variables de Java a los objetos en la interfaz.
         BotonCrearSucursalNS = (Button) findViewById(R.id.BotonCrearSucursalNS);
@@ -53,9 +116,10 @@ public class FormularioSucursales extends AppCompatActivity
         BotonBorrarSucursalNS = (Button) findViewById(R.id.BotonBorrarSucursalNS);
         BotonActualizarSucursalNS = (Button) findViewById(R.id.BotonActualizarSucursalNS);
         EspacioNombreNS = (EditText) findViewById(R.id.EspacioNombreNS);
-        EspacioUbicacionNS = (EditText) findViewById(R.id.EspacioUbicacionNS);
+        EspacioLatitudNS = (EditText) findViewById(R.id.EspacioLatitudNS);
+        EspacioLongitudNS = (EditText) findViewById(R.id.EspacioLongitudNS);
         EspacioIdSucursalNS = (EditText) findViewById(R.id.EspacioIdSucursalNS);
-        ImagenSucursalNS = (ImageView) findViewById(R.id.ImagenSucursalNS);
+        //ImagenSucursalNS = (ImageView) findViewById(R.id.ImagenSucursalNS);
 
         try
         {
@@ -74,8 +138,8 @@ public class FormularioSucursales extends AppCompatActivity
                             try
                             {
                                 InputStream inputStream = getContentResolver().openInputStream(result);
-                                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                                ImagenSucursalNS.setImageBitmap(bitmap);
+                                //Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                                //ImagenSucursalNS.setImageBitmap(bitmap);
                             }
                             catch (FileNotFoundException e)
                             {
@@ -89,16 +153,16 @@ public class FormularioSucursales extends AppCompatActivity
             Log.e("BaseDeDatos",e.toString());
         }
 
-        // Comando para que cuando den un click al icono de buscar imagen realice una accion.
-        ImagenSucursalNS.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            // Comando para acceder a la galeria de imagenes.
-            public void onClick(View v)
-            {
-                contenido.launch("image/*");
-            }
-        });
+//        // Comando para que cuando den un click al icono de buscar imagen realice una accion.
+//        ImagenSucursalNS.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            // Comando para acceder a la galeria de imagenes.
+//            public void onClick(View v)
+//            {
+//                contenido.launch("image/*");
+//            }
+//        });
 
         BotonCrearSucursalNS.setOnClickListener(new View.OnClickListener()
         {
@@ -108,7 +172,8 @@ public class FormularioSucursales extends AppCompatActivity
                 Sucursal sucursal = new Sucursal
                         (
                         EspacioNombreNS.getText().toString(),
-                        EspacioUbicacionNS.getText().toString(),
+                        Double.parseDouble(EspacioLatitudNS.getText().toString().trim()),
+                        Double.parseDouble(EspacioLongitudNS.getText().toString().trim()),
                         ""
                         );
 
@@ -142,7 +207,8 @@ public class FormularioSucursales extends AppCompatActivity
                     {
                         Sucursal sucursal = SucursalDb.get(0);
                         EspacioNombreNS.setText(sucursal.getNombre());
-                        EspacioUbicacionNS.setText(sucursal.getUbicacion());
+                        EspacioLatitudNS.setText(String.valueOf(sucursal.getLatitud()));
+                        EspacioLongitudNS.setText(String.valueOf(sucursal.getLongitud()));
 
                         //Bitmap bitmap = BitmapFactory.decodeByteArray(producto.getImagen(),0,producto.getImagen().length);
                         //ImagenProductoNP.setImageBitmap(bitmap);
@@ -214,8 +280,9 @@ public class FormularioSucursales extends AppCompatActivity
     public void Limpiar()
     {
         EspacioIdSucursalNS.setText("");
-        EspacioUbicacionNS.setText("");
-        ImagenSucursalNS.setImageResource(R.drawable.ic_busqueda_imagenes);
+        EspacioLatitudNS.setText("");
+        EspacioLongitudNS.setText("");
+        //ImagenSucursalNS.setImageResource(R.drawable.ic_busqueda_imagenes);
         EspacioIdSucursalNS.setText("");
     }
 }

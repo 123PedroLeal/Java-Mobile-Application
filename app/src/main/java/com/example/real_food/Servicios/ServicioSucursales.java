@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class ServicioSucursales
 {
+    // Instrucción para convertir datos de tipo cursor en ArrayList.
     public ArrayList <Sucursal> cursorToArray(Cursor cursor)
     {
         ArrayList<Sucursal> list = new ArrayList<>();
@@ -24,14 +25,16 @@ public class ServicioSucursales
                     (
                     cursor.getString(0),
                     cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3)
+                    Double.parseDouble(cursor.getString(2)),
+                    Double.parseDouble(cursor.getString(3)),
+                    cursor.getString(4)
                     );
                 list.add(sucursal);
             }
         }
         return list;
     }
+
     // Intruccion para convertir el dato de tipo byte[] a tipo bytearray.
     public byte [] ImageViewtoByte(ImageView imageView)
     {

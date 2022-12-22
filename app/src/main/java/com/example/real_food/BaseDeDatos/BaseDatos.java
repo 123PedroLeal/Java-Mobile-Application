@@ -28,6 +28,13 @@ public class BaseDatos extends SQLiteOpenHelper
                     "description TEXT,"+
                     "price VARCHAR,"+
                     "image TEXT"+")");
+
+//        db.execSQL("CREATE TABLE SUCURSALES("+
+//                "id TEXT PRIMARY KEY,"+
+//                "name VARCHAR,"+
+//                "description TEXT,"+
+//                "price VARCHAR,"+
+//                "image TEXT"+")");
     }
 
     @Override

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="#AEC670">
@@ -12,17 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
+        android:gravity="left"
         android:background="@drawable/des_tarjetas"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp">
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
 
         <LinearLayout
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
             android:orientation="vertical"
             android:layout_marginLeft="20dp">
 
@@ -49,17 +49,37 @@
                 android:fontFamily="@font/dmsans_regular"
                 android:textColor="@color/white" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
             <TextView
-                android:id="@+id/UbicacionSucursal"
+                android:id="@+id/LatitudSucursal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
 
-                android:text="Ubicacion"
+                android:text="Latitud"
                 android:textSize="22dp"
                 android:fontFamily="@font/dmsans_bold"
                 android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/LongitudSucursal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="Longitud"
+                android:textSize="22dp"
+                android:fontFamily="@font/dmsans_bold"
+                android:textColor="@color/white" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -67,9 +87,10 @@
             android:id="@+id/ImagenSucursal"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_weight="1"
-            android:layout_marginRight="20dp"
-            app:srcCompat="@tools:sample/avatars" />
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+
+            app:srcCompat="@drawable/ic_busqueda" />
 
     </LinearLayout>
 

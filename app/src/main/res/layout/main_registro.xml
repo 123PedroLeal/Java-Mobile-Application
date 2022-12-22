@@ -9,7 +9,15 @@
     android:background="@color/green_secondary"
     android:gravity="center">
 
-    `<TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+    <TextView
         android:id="@+id/TituloRegistro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +26,7 @@
         android:gravity="center"
         android:text="Registro"
         android:textColor="#344C11"
-        android:textSize="65dp"  />`
+        android:textSize="65dp"/>
 
     <ImageView
         android:id="@+id/IconoRegistro"
@@ -41,7 +49,7 @@
             android:ems="10"
             android:fontFamily="@font/dmsans_bold"
             android:gravity="center"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
 
             android:inputType="textPersonName"
             android:hint="Ingrese su correo"
@@ -55,7 +63,7 @@
             android:ems="10"
             android:fontFamily="@font/dmsans_bold"
             android:gravity="center"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="10dp"
 
             android:inputType="textPassword"
             android:hint="Ingrese su contraseña (min. 6 caracteres)"
@@ -69,7 +77,7 @@
             android:ems="10"
             android:fontFamily="@font/dmsans_bold"
             android:gravity="center"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="10dp"
 
             android:inputType="textPassword"
             android:hint="Confirme su contraseña"
@@ -110,5 +118,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="15dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

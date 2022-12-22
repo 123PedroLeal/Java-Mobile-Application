@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class ServicioProductos
 {
+    // Convertir cursor a un array.
     public ArrayList <Producto> cursorToArray(Cursor cursor)
     {
         ArrayList<Producto> list = new ArrayList<>();

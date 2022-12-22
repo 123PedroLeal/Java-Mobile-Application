@@ -87,6 +87,11 @@ public class FormularioProductos extends AppCompatActivity
             Log.e("BaseDeDatos",e.toString());
         }
 
+        Intent intentIN = getIntent();
+        EspacioNombreNP.setText(intentIN.getStringExtra("nombre"));
+        EspacioDescripcionNP.setText(intentIN.getStringExtra("descripcion"));
+        EspacioPrecioNP.setText(String.valueOf(intentIN.getIntExtra("precio",0)));
+
         // Comando para que cuando den un click al icono de buscar imagen realice una accion.
         ImagenProductoNP.setOnClickListener(new View.OnClickListener()
         {
@@ -103,24 +108,43 @@ public class FormularioProductos extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Producto producto = new Producto
-                        (
-                        EspacioNombreNP.getText().toString(),
-                        EspacioDescripcionNP.getText().toString(),
-                        Integer.parseInt(EspacioPrecioNP.getText().toString()),
-                        ""
-                        );
+                if (intentIN.getBooleanExtra("edit",false))
+                {
+                    String id = intentIN.getStringExtra("id");
 
-                //Instruccion para insertar producto en base de datos local.
-                baseDatos.InsertarProducto(producto);
-                //Instruccion para insertar producto en base de datos Firebase.
-                //baseDatosFireBase.InsertarProducto(producto);
+                    Producto producto = new Producto
+                            (
+                                    id,
+                                    EspacioNombreNP.getText().toString(),
+                                    EspacioDescripcionNP.getText().toString(),
+                                    Integer.parseInt(EspacioPrecioNP.getText().toString()),
+                                    ""
+                            );
+                    baseDatosFireBase.ActualizarProducto(producto);
 
+                    Toast.makeText(getApplicationContext(),"El Producto ha sido Actualizado",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Producto producto = new Producto
+                            (
+                                    EspacioNombreNP.getText().toString(),
+                                    EspacioDescripcionNP.getText().toString(),
+                                    Integer.parseInt(EspacioPrecioNP.getText().toString()),
+                                    ""
+                            );
+
+                    //Instruccion para insertar producto en base de datos local.
+                    //baseDatos.InsertarProducto(producto);
+                    //Instruccion para insertar producto en base de datos Firebase.
+                    baseDatosFireBase.InsertarProducto(producto);
+                    Toast.makeText(getApplicationContext(),"El Producto ha sido creado",Toast.LENGTH_SHORT).show();
+                }
 
                 Intent intent = new Intent(getApplicationContext(), Catalogo_Productos.class);
                 startActivity(intent);
 
-                Toast.makeText(getApplicationContext(),"El Producto ha sido creado",Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -159,25 +183,25 @@ public class FormularioProductos extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                String id = EspacioIdProductoNP.getText().toString().trim();
-                if (id.compareTo("")==0)
-                {
-                    Toast.makeText(getApplicationContext(),"Ingrese un ID",Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    ArrayList<Producto> ProductoDb = servicioProductos.cursorToArray(baseDatos.getProductoporId(id));
-                    if (ProductoDb.size() != 0)
-                    {
-                        baseDatos.BorrarporId(id);
-                        Toast.makeText(getApplicationContext(), "El producto " + id + " ha sido eliminado", Toast.LENGTH_SHORT).show();
-                        Limpiar();
-                    }
-                    else
-                    {
-                        Toast.makeText(getApplicationContext(),"Ese Producto No Existe",Toast.LENGTH_SHORT).show();
-                    }
-                }
+//                String id = EspacioIdProductoNP.getText().toString().trim();
+//                if (id.compareTo("")==0)
+//                {
+//                    Toast.makeText(getApplicationContext(),"Ingrese un ID",Toast.LENGTH_SHORT).show();
+//                }
+//                else
+//                {
+//                    ArrayList<Producto> ProductoDb = servicioProductos.cursorToArray(baseDatos.getProductoporId(id));
+//                    if (ProductoDb.size() != 0)
+//                    {
+//                        baseDatos.BorrarporId(id);
+//                        Toast.makeText(getApplicationContext(), "El producto " + id + " ha sido eliminado", Toast.LENGTH_SHORT).show();
+//                        Limpiar();
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"Ese Producto No Existe",Toast.LENGTH_SHORT).show();
+//                    }
+//                }
             }
         });
 

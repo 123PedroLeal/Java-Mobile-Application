@@ -5,15 +5,19 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.api.IMapView;
 import org.osmdroid.config.Configuration;
+import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay;
 
@@ -53,6 +57,26 @@ private MapController mapController;
         GeoPoint madrid = new GeoPoint(40.41675,-3.70379);
         MapController mMapController= (MapController) mapa.getController();
         mMapController.setCenter(madrid);
+
+        MapEventsReceiver mapEventsReceiver = new MapEventsReceiver()
+        {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint p)
+            {
+                Toast.makeText(getApplicationContext(), p.getLatitude() + "-" + p.getLongitude() , Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint p)
+            {
+                return false;
+            }
+        };
+
+        MapEventsOverlay eventsOverlay = new MapEventsOverlay(getApplicationContext(),mapEventsReceiver);
+        mapa.getOverlays().add(eventsOverlay);
     }
 
 }

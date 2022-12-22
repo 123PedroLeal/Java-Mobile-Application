@@ -6,19 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.example.real_food.BaseDeDatos.BaseDatosFireBase;
 import com.example.real_food.Entidades.Producto;
 import com.example.real_food.R;
+import com.example.real_food.Vistas.Productos.Catalogo_Productos;
 import com.example.real_food.Vistas.Productos.Detalle_Productos;
+import com.example.real_food.Vistas.Productos.FormularioProductos;
 
 import java.util.ArrayList;
 
 public class ProductoAdaptador extends BaseAdapter
 {
+    //Es necesario para poder realizar las listas.
+
     // Declaracion del contexto y lista de productos.
     private Context context;
     private ArrayList<Producto> arrayProductos;
@@ -65,6 +71,8 @@ public class ProductoAdaptador extends BaseAdapter
         TextView nombreproducto = (TextView)convertView.findViewById(R.id.NombreProducto);
         TextView descripcionproducto = (TextView)convertView.findViewById(R.id.DescripcionProducto);
         TextView precioproducto = (TextView)convertView.findViewById(R.id.PrecioProducto);
+        Button borrarproducto = (Button)convertView.findViewById(R.id.BotonBorrarProductoFB);
+        Button actualizaproducto = (Button)convertView.findViewById(R.id.BotonActualizarProductoFB);
         LinearLayout tarjetaproducto = (LinearLayout) convertView.findViewById(R.id.TarjetaProducto);
 
         //Bitmap bitmap = BitmapFactory.decodeByteArray(producto.getImagen(),0,producto.getImagen().length);
@@ -85,6 +93,34 @@ public class ProductoAdaptador extends BaseAdapter
                 intent.putExtra("precio",producto.getPrecio());
                 intent.putExtra("id",producto.getId());
 
+                context.startActivity(intent);
+            }
+        });
+
+        borrarproducto.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                BaseDatosFireBase baseDatosFireBase = new BaseDatosFireBase();
+                baseDatosFireBase.BorrarporId(producto.getId());
+                Intent intent = new Intent(context.getApplicationContext(), Catalogo_Productos.class);
+                context.startActivity(intent);
+            }
+        });
+
+        actualizaproducto.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(context.getApplicationContext(), FormularioProductos.class);
+                intent.putExtra("edit",true);
+                intent.putExtra("id", producto.getId());
+                intent.putExtra("nombre",producto.getNombre());
+                intent.putExtra("descripcion",producto.getDescription());
+                intent.putExtra("precio",producto.getPrecio());
+                intent.putExtra("imagen",producto.getImagen());
                 context.startActivity(intent);
             }
         });

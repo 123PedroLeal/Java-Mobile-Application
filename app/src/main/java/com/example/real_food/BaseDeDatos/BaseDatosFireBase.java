@@ -77,18 +77,47 @@ public class BaseDatosFireBase
 
     public void BorrarporId(String id)
     {
-        db.collection("Productos").document(id).delete();
+        db.collection("Productos").whereEqualTo("id",id)
+        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            for(QueryDocumentSnapshot documentSnapshot : task.getResult())
+                            {
+                                documentSnapshot.getReference().delete();
+                            }
+                        }
+                    }
+                });
     }
 
     public void ActualizarProducto(Producto producto)
     {
-        db.collection("Productos").document(String.valueOf(producto.getId())).update
-        (
-            "nombre", producto.getNombre(),
-            "description", producto.getDescription(),
-            "precio", producto.getPrecio(),
-            "imagen", producto.getImagen()
-        );
+        db.collection("Productos").whereEqualTo("id",producto.getId())
+        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            for(QueryDocumentSnapshot documentSnapshot : task.getResult())
+                            {
+                                documentSnapshot.getReference().update
+                                        (
+                                                "nombre",producto.getNombre(),
+                                                "description", producto.getDescription(),
+                                                "precio",producto.getPrecio(),
+                                                "imagen",producto.getImagen()
+                                        );
+                            }
+                        }
+                    }
+                });
+
     }
 
 
@@ -97,18 +126,19 @@ public class BaseDatosFireBase
         // Crea un producto con su nombre descripcion y precio.
         Map<String, Object> markets = new HashMap<>();
         markets.put("id", sucursal.getId());
-        markets.put("image", sucursal.getImagen());
         markets.put("nombre", sucursal.getNombre());
-        markets.put("ubicacion",sucursal.getUbicacion());
+        markets.put("latitud",sucursal.getLatitud());
+        markets.put("longitud",sucursal.getLongitud());
+        markets.put("imagen", sucursal.getImagen());
 
 
-        // Agrega el nuevo "product" a la base de datos.
-        db.collection("Productos").add(sucursal);
+        // Agrega el nuevo "markets" a la base de datos.
+        db.collection("Sucursales").add(sucursal);
     }
 
     public void getSucursales(SucursalAdaptador sucursalAdaptador, ArrayList<Sucursal> ListaSucursales)
     {
-        db.collection("Productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+        db.collection("Sucursales").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task)
@@ -122,7 +152,8 @@ public class BaseDatosFireBase
                                 (
                                         document.getData().get("id").toString(),
                                         document.getData().get("nombre").toString(),
-                                        document.getData().get("ubicacion").toString(),
+                                        Double.parseDouble(document.getData().get("latitud").toString()),
+                                        Double.parseDouble(document.getData().get("longitud").toString()),
                                         document.getData().get("imagen").toString()
                                 );
                         ListaSucursales.add(sucursal);
@@ -136,5 +167,4 @@ public class BaseDatosFireBase
             }
         });
     }
-
 }
