@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.example.real_food.BaseDeDatos.BaseDatosFireBase;
 import com.example.real_food.Entidades.Producto;
 import com.example.real_food.R;
@@ -81,6 +82,10 @@ public class ProductoAdaptador extends BaseAdapter
         descripcionproducto.setText(producto.getDescription());
         precioproducto.setText(String.valueOf(producto.getPrecio()));
 
+        Glide.with(context)
+                .load(producto.getImagen())
+                .override(500, 500)
+                .into(imagenproducto);
         //Instruccion para que al cliquear la tarjeta completa pase a la vista 3.
         tarjetaproducto.setOnClickListener(new View.OnClickListener()
         {
@@ -91,7 +96,7 @@ public class ProductoAdaptador extends BaseAdapter
                 intent.putExtra("nombre",producto.getNombre());
                 intent.putExtra("descripcion",producto.getDescription());
                 intent.putExtra("precio",producto.getPrecio());
-                intent.putExtra("id",producto.getId());
+                intent.putExtra("imagen",producto.getImagen());
 
                 context.startActivity(intent);
             }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.real_food.BaseDeDatos.BaseDatos;
 import com.example.real_food.Entidades.Producto;
 import com.example.real_food.R;
@@ -36,11 +37,13 @@ public class Detalle_Productos extends AppCompatActivity
         BotonRegresoProductos = (Button) findViewById(R.id.BotonRegresoProductos);
 
         Intent intent = getIntent();
-        baseDatos = new BaseDatos(this);
-        servicioProductos = new ServicioProductos();
 
-        String id = String.valueOf(intent.getIntExtra("id",0));
-        ArrayList<Producto> ProductoDb = servicioProductos.cursorToArray(baseDatos.getProductoporId(id));
+//        Instrucciones para bases de datos local.
+//        baseDatos = new BaseDatos(this);
+//        servicioProductos = new ServicioProductos();
+//
+//        String id = String.valueOf(intent.getIntExtra("id",0));
+//        ArrayList<Producto> ProductoDb = servicioProductos.cursorToArray(baseDatos.getProductoporId(id));
 
         //Comandos para la imagen como Bitmap.
         //Producto producto = ProductoDb.get(0);
@@ -50,6 +53,11 @@ public class Detalle_Productos extends AppCompatActivity
         TituloInfo.setText(intent.getStringExtra("nombre"));
         DescripcionInfo.setText(intent.getStringExtra("descripcion"));
         PrecioInfo.setText(String.valueOf(intent.getIntExtra("precio",0)));
+        Glide.with(Detalle_Productos.this)
+                .load(intent.getStringExtra("imagen"))
+                .override(500, 500)
+                .into(ImagenInfo);
+
 
         BotonRegresoProductos.setOnClickListener(new View.OnClickListener()
         {

@@ -3,6 +3,7 @@ package com.example.real_food.Vistas.Productos;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,11 +17,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.real_food.BaseDeDatos.BaseDatos;
 import com.example.real_food.BaseDeDatos.BaseDatosFireBase;
 import com.example.real_food.Entidades.Producto;
 import com.example.real_food.R;
 import com.example.real_food.Servicios.ServicioProductos;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -36,6 +44,8 @@ public class FormularioProductos extends AppCompatActivity
     private BaseDatosFireBase baseDatosFireBase;
     private ActivityResultLauncher<String> contenido;
     private ServicioProductos servicioProductos;
+    private StorageReference storageReference;
+    private String UrlImagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,6 +64,7 @@ public class FormularioProductos extends AppCompatActivity
         EspacioPrecioNP = (EditText) findViewById(R.id.EspacioPrecioNP);
         EspacioIdProductoNP = (EditText) findViewById(R.id.EspacioIdProductoNP);
         ImagenProductoNP = (ImageView) findViewById(R.id.ImagenProductoNP);
+        UrlImagen = "";
 
         try
         {
@@ -61,6 +72,7 @@ public class FormularioProductos extends AppCompatActivity
             baseDatos = new BaseDatos(this);
             baseDatosFireBase = new BaseDatosFireBase();
             servicioProductos = new ServicioProductos();
+            storageReference = FirebaseStorage.getInstance().getReference();
 
             contenido = registerForActivityResult(
                     new ActivityResultContracts.GetContent(),
@@ -69,16 +81,40 @@ public class FormularioProductos extends AppCompatActivity
                         @Override
                         public void onActivityResult(Uri result)
                         {
-                            try
+                            Uri uri = result;
+                            StorageReference filepath = storageReference.child("Imagen").child(uri.getLastPathSegment());
+                            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
                             {
-                                InputStream inputStream = getContentResolver().openInputStream(result);
-                                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                                ImagenProductoNP.setImageBitmap(bitmap);
-                            }
-                            catch (FileNotFoundException e)
-                            {
-                                Log.e("FileError", e.toString());
-                            }
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                                {
+                                    Toast.makeText(getApplicationContext(),"La imagen ha sido cargada",Toast.LENGTH_SHORT).show();
+                                    filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                                    {
+                                        @Override
+                                        public void onSuccess(Uri uri)
+                                        {
+                                            Uri UrlDescargada = uri;
+                                            UrlImagen = UrlDescargada.toString();
+                                            Glide.with(FormularioProductos.this)
+                                                    .load(UrlDescargada)
+                                                    .override(500, 500)
+                                                    .into(ImagenProductoNP);
+                                        }
+                                    });
+                                }
+                            });
+//                            Instrucciones para guardar las imagenes en local.
+//                            try
+//                            {
+////                                InputStream inputStream = getContentResolver().openInputStream(result);
+////                                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+////                                ImagenProductoNP.setImageBitmap(bitmap);
+//                            }
+//                            catch (FileNotFoundException e)
+//                            {
+//                                Log.e("FileError", e.toString());
+//                            }
                         }
                     });
         }
@@ -118,7 +154,7 @@ public class FormularioProductos extends AppCompatActivity
                                     EspacioNombreNP.getText().toString(),
                                     EspacioDescripcionNP.getText().toString(),
                                     Integer.parseInt(EspacioPrecioNP.getText().toString()),
-                                    ""
+                                    UrlImagen
                             );
                     baseDatosFireBase.ActualizarProducto(producto);
 
@@ -131,7 +167,7 @@ public class FormularioProductos extends AppCompatActivity
                                     EspacioNombreNP.getText().toString(),
                                     EspacioDescripcionNP.getText().toString(),
                                     Integer.parseInt(EspacioPrecioNP.getText().toString()),
-                                    ""
+                                    UrlImagen
                             );
 
                     //Instruccion para insertar producto en base de datos local.
